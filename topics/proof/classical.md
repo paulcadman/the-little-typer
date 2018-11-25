@@ -133,3 +133,33 @@ Examples:
 2. ¬P where P is a tautology
 
 NB: ¬ is the symbol for logical negation.
+
+We'll see that P ∧ (¬P) is not a tautology in some other logics.
+
+
+## Inference
+
+A tautology (P₁ ∧ P₂ ∧ … ∧ Pₙ) ⇒ Q is called an _inference_. If the statements
+on the left hand side of the implications are true then we infer that Q is true.
+
+
+## Proof
+
+A proof of P ⇒ Q given the truth of the hypothesis statements H₁, H₂, … Hₙis a
+sequence of steps, Sₙ, starting with S₁ = P and ending with Sₙ = Q. Each step is
+equal to a hypothesis statement or a statement or predicate satisfying:
+
+> (S₁ ∧ … Sₖ₋₁) ⇒ Sₖ
+
+That is, we infer the next step from all the previous ones.
+
+
+## Standard Deductions
+
+Standard patterns called _deductions_ are used in proofs to replace statements
+with logically equivalent statements that are easier to prove. 
+
+1. _Contrapositive_: P ⇒ Q is equivalent to ¬Q ⇒ ¬P
+2. _Proof by contradiction_: P is equivalent to (¬P) ⇒ C (where C is a
+   contradiction)
+3. P ⇔ Q is equivalent to (P ⇒ Q) ∧ (Q ⇒ P)
