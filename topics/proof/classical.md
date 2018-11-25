@@ -112,3 +112,22 @@ the truth function for the conjunction.
 | t | f | f     |
 | f | t | f     |
 | f | f | t     |
+
+
+## Tautology and Contradiction
+
+A statement is called _tautology_ if it is true whatever truth values are
+subsituted for the symbols it contains. 
+
+Examples:
+
+1. P ∨ (¬P)
+2. P ∧ (Q ∨ R) ⇒ (P ∧ Q) ∨ (P ∧ R) 
+
+A statement is called a _contradiction_ if it is false whatever truth values are
+substituted for the symbols it contains.
+
+Examples:
+
+1. P ∧ (¬P)
+2. ¬P where P is a tautology
