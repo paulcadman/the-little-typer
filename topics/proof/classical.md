@@ -163,3 +163,63 @@ with logically equivalent statements that are easier to prove.
 2. _Proof by contradiction_: P is equivalent to (¬P) ⇒ C (where C is a
    contradiction)
 3. P ⇔ Q is equivalent to (P ⇒ Q) ∧ (Q ⇒ P)
+
+
+## Examples
+
+> Prove that there is no smallest rational number greater than √2.
+
+Let's use _proof by contradiction_ to deduce that this is equivalent to:
+
+> (∃ a smallest rational number greater than √2) ⇒ C (where C is a
+> contradiction)
+
+To prove this we follow our proof recipe, our first step is the left hand side
+of the implication.
+
+> *Step 1* ∃ a smallest rational number greater than √2
+
+Let _S_ be the set of rational numbers greater that √2.
+
+> S = { s ∈ ℚ : s > √2 }
+
+Let _ι_ be the smallest element of S, which exists due to *Step 1*.
+
+> *Step 2* (ι - √2) > 0
+
+We can use _contradiction_ again to deduce Step 2:
+
+> (ι - √2 ≤ 0) ⇒ C (for some contradiction C)
+>
+> ι - √2 ≤ 0
+> ⇒ ι ≤ √2
+> ⇒ ¬(ι ∈ S) (a contradiction due to definition of ι)
+
+> *Step 3* ∃ a rational number r between √2 and ι
+
+Again let's use _contradiction_ to deduce Step 3:
+
+> ¬(∃ r ∈ ℚ: √2 < r < ι) ⇒ C (for some contradiction C)
+
+Choose a fixed q ∈ ℕ and let T = { p/q : p ∈ ℤ }. Let m be the smallest member of
+T greater than ι (why does this exist?). The rational number m can be written as
+p/q because from the definition of T.
+
+We know:
+* There are no rationals between √2 and ι (by hypothesis in this step)
+* (p-1)/q < ι (by the construction of p/q in the previous paragraph)
+* p/q ≥ ι (by the construction of p/q, non-strict inequality because ι could be
+  a member of T)
+
+So we deduce that (p-1)/q < √2 and therefore
+
+> p/q - (p-1)/q > ι - √2
+> ⇒ 1/q > ι - √2
+
+We can choose q large enough such that this inequality is false. So we've found
+our contradiction C. We conclude that ∃ r ∈ ℚ: √2 < r < ι.
+
+This gives us our overall contradiction.
+
+> The existence of r < ι contradicts the statement that ι was the least rational
+> greater than √2.
