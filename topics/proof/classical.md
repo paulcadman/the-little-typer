@@ -167,7 +167,7 @@ with logically equivalent statements that are easier to prove.
 
 ## Examples
 
-> Prove that there is no smallest rational number greater than √2.
+### Prove that there is no smallest rational number greater than √2.
 
 Let's use _proof by contradiction_ to deduce that this is equivalent to:
 
@@ -177,7 +177,7 @@ Let's use _proof by contradiction_ to deduce that this is equivalent to:
 To prove this we follow our proof recipe, our first step is the left hand side
 of the implication.
 
-> *Step 1* ∃ a smallest rational number greater than √2
+### *Step 1* ∃ a smallest rational number greater than √2
 
 Let _S_ be the set of rational numbers greater that √2.
 
@@ -185,7 +185,7 @@ Let _S_ be the set of rational numbers greater that √2.
 
 Let _ι_ be the smallest element of S, which exists due to *Step 1*.
 
-> *Step 2* (ι - √2) > 0
+### *Step 2* (ι - √2) > 0
 
 We can use _contradiction_ again to deduce Step 2:
 
@@ -195,7 +195,7 @@ We can use _contradiction_ again to deduce Step 2:
 > ⇒ ι ≤ √2
 > ⇒ ¬(ι ∈ S) (a contradiction due to definition of ι)
 
-> *Step 3* ∃ a rational number r between √2 and ι
+### *Step 3* ∃ a rational number r between √2 and ι
 
 Again let's use _contradiction_ to deduce Step 3:
 
