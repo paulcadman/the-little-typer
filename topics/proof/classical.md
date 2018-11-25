@@ -67,3 +67,48 @@ Examples:
 2. `∃ n ∈ ℕ: ` `n` is even.
 
 The first is false the second is true.
+
+
+## Conjunctions
+
+_Conjunctions_ are used to combine existing statements. The regular conjunctions
+we use are _and_, _or_, _imples_, _if and only if_ denoted ∧, ∨, ⇒, ⇔.
+
+Their meaning can be given using a _truth table_ which is a way to write down
+the truth function for the conjunction.
+
+### And, ∧
+
+| P | Q | P ∧ Q |
+|---|---|-------|
+| t | t | t     |
+| t | f | f     |
+| f | t | f     |
+| f | f | f     |
+
+### Or, ∨
+
+| P | Q | P ∨ Q |
+|---|---|-------|
+| t | t | t     |
+| t | f | t     |
+| f | t | t     |
+| f | f | f     |
+
+### Imples, ⇒
+
+| P | Q | P ⇒ Q |
+|---|---|-------|
+| t | t | t     |
+| t | f | f     |
+| f | t | t     |
+| f | f | t     |
+
+### Imples, ⇔ 
+
+| P | Q | P ⇔ Q |
+|---|---|-------|
+| t | t | t     |
+| t | f | f     |
+| f | t | f     |
+| f | f | t     |
