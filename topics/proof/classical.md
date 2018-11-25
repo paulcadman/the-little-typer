@@ -51,12 +51,14 @@ Let `S` be a subset of `X` (the domain of definition of the predicate). Then we
 can for the following statements.
 
 > for all `x ∈ S`, `P(x)` is true
+>
 > for some `x ∈ S`, `P(x)` is true
 
 The mathematical symbols used are the _universal quantifier_ ∀ for the first and
 the _existential quanitifier_ ∃ for the second.
 
 > `∀ x ∈ S: P(x)`
+>
 > `∃ x ∈ S: P(x)`
 
 Examples:
