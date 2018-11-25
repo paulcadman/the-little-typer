@@ -79,39 +79,39 @@ the truth function for the conjunction.
 
 ### And, ∧
 
-| P | Q | P ∧ Q |
-|---|---|-------|
-| t | t | t     |
-| t | f | f     |
-| f | t | f     |
-| f | f | f     |
+| P     | Q     | P ∧ Q |
+|-------|-------|-------|
+| true  | true  | true  |
+| true  | false | false |
+| false | true  | false |
+| false | false | false |
 
 ### Or, ∨
 
-| P | Q | P ∨ Q |
-|---|---|-------|
-| t | t | t     |
-| t | f | t     |
-| f | t | t     |
-| f | f | f     |
+| P     | Q     | P ∨ Q |
+|-------|-------|-------|
+| true  | true  | true  |
+| true  | false | true  |
+| false | true  | true  |
+| false | false | false |
 
 ### Imples, ⇒
 
-| P | Q | P ⇒ Q |
-|---|---|-------|
-| t | t | t     |
-| t | f | f     |
-| f | t | t     |
-| f | f | t     |
+| P     | Q     | P ⇒ Q |
+|-------|-------|-------|
+| true  | true  | true  |
+| true  | false | false |
+| false | true  | true  |
+| false | false | true  |
 
 ### Imples, ⇔ 
 
-| P | Q | P ⇔ Q |
-|---|---|-------|
-| t | t | t     |
-| t | f | f     |
-| f | t | f     |
-| f | f | t     |
+| P     | Q     | P ⇔ Q |
+|-------|-------|-------|
+| true  | true  | true  |
+| true  | false | false |
+| false | true  | false |
+| false | false | true  |
 
 
 ## Tautology and Contradiction
