@@ -139,17 +139,17 @@ We'll see that P ∧ (¬P) is not a tautology in some other logics.
 
 ## Inference
 
-A tautology (P₁ ∧ P₂ ∧ … ∧ Pₙ) ⇒ Q is called an _inference_. If the statements
+A tautology (P₁ ∧ P₂ ∧ … ∧ P\_n) ⇒ Q is called an _inference_. If the statements
 on the left hand side of the implications are true then we infer that Q is true.
 
 
 ## Proof
 
-A proof of P ⇒ Q given the truth of the hypothesis statements H₁, H₂, … Hₙis a
-sequence of steps, Sₙ, starting with S₁ = P and ending with Sₙ = Q. Each step is
+A proof of P ⇒ Q given the truth of the hypothesis statements H₁, H₂, … H\_p is a
+sequence of steps, S\_k, starting with S₁ = P and ending with S\_n = Q. Each step is
 equal to a hypothesis statement or a statement or predicate satisfying:
 
-> (S₁ ∧ … Sₖ₋₁) ⇒ Sₖ
+> (S₁ ∧ … S\_{k-1}) ⇒ S\_k
 
 That is, we infer the next step from all the previous ones.
 
