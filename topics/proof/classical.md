@@ -131,3 +131,5 @@ Examples:
 
 1. P ∧ (¬P)
 2. ¬P where P is a tautology
+
+NB: ¬ is the symbol for logical negation.
