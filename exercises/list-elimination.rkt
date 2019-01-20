@@ -49,7 +49,6 @@
 
 ;; Exercise 5.4
 ;;
-;; Define a function called sort-List-Nat which takes (in addition to the type
-;; argument for the list element) one (List E) argument and evaluates to a
-;; a (List E) consisting of the elements from the list argument sorted in
-;; ascending order.
+;; Define a function called sort-List-Nat which takes one (List Nat) argument
+;; and evaluates to a (List Nat) consisting of the elements from the list
+;; argument sorted in ascending order.
