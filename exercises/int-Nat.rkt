@@ -16,8 +16,8 @@
 
 ;; Exercise 7.1
 ;;
-;; Define a function called append that takes an argument of type (Vect E n) and an
-;; argument of type (Vect E m) and evaluates to a value of type (Vec (+ n m)), the 
+;; Define a function called append that takes an argument of type (Vec E n) and an
+;; argument of type (Vect E m) and evaluates to a value of type (Vec (+ n m)), the
 ;; result of appending the elements of the second argument to the end of the first.
 
 (claim append
