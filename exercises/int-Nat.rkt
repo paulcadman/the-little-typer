@@ -14,6 +14,12 @@
              (λ (a-k b+a-k)
                (add1 b+a-k)))))
 
+;; Exercise 7.0
+;;
+;; Define a function called zip that takes an argument of type (Vec A n) and a
+;; second argument of type (Vec B n) and evaluates to a vlue of type (Vec (Pair A B) n),
+;; the result of zipping the first and second arguments.
+
 ;; Exercise 7.1
 ;;
 ;; Define a function called append that takes an argument of type (Vec E n) and an
