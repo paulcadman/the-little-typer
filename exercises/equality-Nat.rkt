@@ -38,9 +38,9 @@
 ;; Define a function called plusCommutative that states and proves that
 ;; + is commutative
 ;;
-;; NB: You may find the trans elimiator useful
+;; Bonus: Write the solution using the trans elimiator instead of
+;; the replace elimiator.
 ;; https://docs.racket-lang.org/pie/index.html#%28def._%28%28lib._pie%2Fmain..rkt%29._trans%29%29
-
 
 (claim plusCommutative
        (Π ([n Nat]
