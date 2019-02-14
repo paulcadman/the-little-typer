@@ -39,6 +39,14 @@
 ;; if you cons the same value to the front of two equal Lists then
 ;; the resulting Lists are also equal.
 
+(claim same-cons
+       (Π ([E U]
+           [l1 (List E)]
+           [l2 (List E)]
+           [e E])
+          (-> (= (List E) l1 l2)
+              (= (List E) (:: e l1) (:: e l2)))))
+
 ;; Exercise 9.2
 ;;
 ;; Define a function called same-lists that states and proves that
