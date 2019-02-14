@@ -33,7 +33,19 @@
            [k Nat])
           (= Nat (+ k (+ n m)) (+ (+ k n) m))))
 
-;; Exercise 8.4
+;; Exercise 9.1
+;;
+;; Define a function called same-cons that states and proves that
+;; if you cons the same value to the front of two equal Lists then
+;; the resulting Lists are also equal.
+
+;; Exercise 9.2
+;;
+;; Define a function called same-lists that states and proves that
+;; if two values, e1 and e2, are equal and two lists, l1 and l2 are
+;; equal then the two lists, (:: e1 l1) and (:: e2 l2) are also equal.
+
+;; Exercise 9.3 (was previously called Exercise 8.4)
 ;;
 ;; Define a function called plusCommutative that states and proves that
 ;; + is commutative
