@@ -30,16 +30,17 @@
 ;; Define a function called a=b->a+n=b+n that states and proves that
 ;; a = b implies a+n = b+n for all Nats a, b, n.
 
-(claim a=b->a+1=b+1
+(claim a=b->a+n=b+n
        (Π ([a Nat]
-           [b Nat])
+           [b Nat]
+           [n Nat])
           (-> (= Nat a b)
-              (= Nat (add1 a) (add1 b)))))
+              (= Nat (+ n a) (+ n b)))))
 
-(define a=b->a+1=b+1
-  (λ (a b)
+(define a=b->a+n=b+n
+  (λ (a b n)
     (λ (a=b)
-      (cong a=b (+ 1)))))
+      (cong a=b (+ n)))))
 
 ;; Exercise 8.3
 ;;
