@@ -35,12 +35,15 @@
            [b Nat]
            [n Nat])
           (-> (= Nat a b)
-              (= Nat (+ n a) (+ n b)))))
+              (= Nat (+ a n) (+ b n)))))
 
 (define a=b->a+n=b+n
   (λ (a b n)
     (λ (a=b)
-      (cong a=b (+ n)))))
+      (replace a=b
+               (λ (k)
+                 (= Nat (+ a n) (+ k n)))
+               (same (+ a n))))))
 
 ;; Exercise 8.3
 ;;
@@ -107,10 +110,10 @@
 (define same-cons
   (λ (E l1 l2 e)
     (λ (prf)
-      (replace (symm prf)
+      (replace prf
                (λ (l)
-                 (= (List E) (:: e l) (:: e l2)))
-               (same (:: e l2))))))
+                 (= (List E) (:: e l1) (:: e l)))
+               (same (:: e l1))))))
 
 
 ;; Exercise 9.2
@@ -130,11 +133,18 @@
 
 (define same-lists
   (λ (E l1 l2 e1 e2)
-    (λ (prf-e prf-l)
-      (replace (symm prf-e)
+    (λ (e1=e2 l1=l2)
+      (replace e1=e2
                (λ (k)
-                 (= (List E) (:: k l1) (:: e2 l2)))
-               (same-cons E l1 l2 e2 prf-l)))))
+                 (= (List E) (:: e1 l1) (:: k l2)))
+               (same-cons E l1 l2 e1 l1=l2)))))
+#;(define same-lists
+  (λ (E l1 l2 e1 e2)
+    (λ (prf-e prf-l)
+      (replace prf-e
+               (λ (k)
+                 (= (List E) (:: e1 l1) (:: k l2)))
+               (same-cons E l1 l2 e1 prf-l)))))
 
 
 ;; Exercise 9.3 (was previously called Exercise 8.4)
