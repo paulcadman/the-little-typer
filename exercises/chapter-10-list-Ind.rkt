@@ -50,9 +50,9 @@
 
 ;; Exercise 10.1
 ;;
-;; Define a function called that states and proves that if you append
-;; two lists, l1 and l2, and then the length of the result is equal to
-;; the sum of the lengths of l1 and l2.
+;; Define a function called list-length-append-dist that states and proves that
+;; if you append two lists, l1 and l2, and then the length of the result is
+;; equal to the sum of the lengths of l1 and l2.
 
 (claim list-length-append-dist
        (Π ([E U]
