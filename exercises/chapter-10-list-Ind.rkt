@@ -61,3 +61,50 @@
           (= Nat
              (length E (append E l1 l2))
              (+ (length E l1) (length E l2)))))
+
+
+;; Exercise 10.2
+;;
+;; In the following exercises we'll use the function called <= that takes two
+;; Nat arguments a, b and evaluates to a type representing the proposition
+;; that a is less than or equal to b.
+
+(claim <=
+       (-> Nat Nat
+           U))
+
+(define <=
+  (λ (a b)
+    (Σ ([k Nat])
+       (= Nat (+ k a) b))))
+
+;; Exercise 10.2.1
+;;
+;; Using <=, state and prove that 1 is less than or equal to 2.
+
+;; Exercise 10.2.2
+;;
+;; Define a funciton called <=-simplify to state and prove that for all
+;; Nats a, b, n we have that n+a <= b implies a <= b
+;;
+;; NB: You may need to use plusAssociative that was proved in Exercise 8.3.
+
+(claim <=-simplify
+       (Π ([a Nat]
+           [b Nat]
+           [n Nat])
+          (-> (<= (+ n a) b)
+              (<= a b))))
+
+;; Exercise 10.2.3
+;;
+;; Define a function called <=-trans that states and proves that <= is
+;; transitive.
+
+(claim <=-trans
+       (Π ([a Nat]
+           [b Nat]
+           [c Nat])
+          (-> (<= a b)
+              (<= b c)
+              (<= a c))))
