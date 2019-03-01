@@ -48,6 +48,44 @@
                 end
                 (step-append E)))))
 
+(claim filter-list
+       (Π ([E U])
+          (-> (-> E Nat) (List E)
+              (List E))))
+
+(claim filter-list-step
+       (Π ([E U])
+          (-> (-> E Nat)
+              (-> E (List E) (List E)
+                  (List E)))))
+
+(claim if
+       (Π ([A U])
+          (-> Nat A A
+              A)))
+
+(define if
+  (λ (A)
+    (λ (e if-then if-else)
+      (which-Nat e
+                 if-else
+                 (λ (_) if-then)))))
+
+(define filter-list-step
+  (λ (E)
+    (λ (p)
+      (λ (e es filtered-es)
+        (if (List E) (p e)
+            (:: e filtered-es)
+            filtered-es)))))
+
+(define filter-list
+  (λ (E)
+    (λ (p es)
+      (rec-List es
+                (the (List E) nil)
+                (filter-list-step E p)))))
+
 ;; Exercise 10.1
 ;;
 ;; Define a function called list-length-append-dist that states and proves that
@@ -108,3 +146,16 @@
           (-> (<= a b)
               (<= b c)
               (<= a c))))
+
+;; Exercise 10.3
+;;
+;; Define a function called length-filter-list that states and proves that
+;; filtering a list (in the sense of filter-list from Exercise 5.3) evaluates
+;; to a a list no longer than the original list.
+
+(claim length-filter-list
+       (Π ([E U]
+           [l (List E)]
+           [p (-> E Nat)])
+          (<= (length E (filter-list E p l))
+              (length E l))))
