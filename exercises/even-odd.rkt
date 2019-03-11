@@ -1,0 +1,65 @@
+#lang pie
+
+;; Exercises on Even and Odd from Chapter 12 of The Little Typer
+
+(claim +
+       (-> Nat Nat
+           Nat))
+
+(define +
+  (λ (a b)
+    (rec-Nat a
+             b
+             (λ (_ a+b-1)
+               (add1 a+b-1)))))
+
+(claim double
+       (-> Nat
+           Nat))
+
+(define double
+  (λ (n)
+    (rec-Nat n
+             0
+             (λ (_ n+n-2)
+               (+ 2 n+n-2)))))
+
+(claim Even
+       (-> Nat
+           U))
+
+(define Even
+  (λ (n)
+    (Σ ([half Nat])
+       (= Nat n (double half)))))
+
+(claim Odd
+       (-> Nat
+           U))
+
+(define Odd
+  (λ (n)
+    (Σ ([haf Nat])
+       (= Nat n (add1 (double haf))))))
+
+;; Exercise 12.1
+;;
+;; Define a function called sumOfTwoEvensIsEven that states and proves that the sum
+;; of two Even Nats is Even.
+
+(claim sumOfTwoEvensIsEven
+       (Π ([n Nat]
+           [m Nat])
+          (-> (Even n) (Even m)
+              (Even (+ n m)))))
+
+;; Exercise 12.2
+;;
+;; Define a function called sumOfTwoOddsIsEven that states and proves that the sum of
+;; two Odd Nats is Even.
+
+(claim sumOfTwoOddsIsEven
+       (Π ([n Nat]
+           [m Nat])
+          (-> (Odd n) (Odd m)
+              (Even (+ n m)))))
