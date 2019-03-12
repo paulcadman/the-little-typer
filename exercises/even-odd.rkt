@@ -42,6 +42,16 @@
     (Σ ([haf Nat])
        (= Nat n (add1 (double haf))))))
 
+(claim <=
+       (-> Nat Nat
+           U))
+
+(define <=
+  (λ (a b)
+    (Σ ([k Nat])
+       (= Nat (+ k a) b))))
+
+
 ;; Exercise 12.1
 ;;
 ;; Define a function called sumOfTwoEvensIsEven that states and proves that the sum
@@ -73,3 +83,13 @@
 (claim nOrSuccnIsEven
        (Π ([n Nat])
           (Either (Even n) (Even (add1 n)))))
+
+;; Exercise 12.4
+;;
+;; Define a function called either-a<=b-or-b<=a that states and proves that for all Nats a b,
+;; either a<=b or b<=a
+
+(claim either-a<=b-or-b<=a
+       (Π ([a Nat]
+           [b Nat])
+          (Either (<= a b) (<= b a))))
