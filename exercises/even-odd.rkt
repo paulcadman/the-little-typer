@@ -63,3 +63,13 @@
            [m Nat])
           (-> (Odd n) (Odd m)
               (Even (+ n m)))))
+
+
+;; Exercise 12.3
+;;
+;; Define a function called nOrSuccnIsEven that states and proves that for all Nats n, either
+;; n is Even or n+1 is Even.
+
+(claim nOrSuccnIsEven
+       (Π ([n Nat])
+          (Either (Even n) (Even (add1 n)))))
