@@ -67,3 +67,19 @@
        (Π ([l Nat])
           (-> (Fin (add1 l)) (Vec Nat l) Nat
               (Vec Nat (add1 l)))))
+
+;; Define Matrix be the type of Nat valued matricies.
+
+(claim Matrix
+       (-> Nat Nat
+           U))
+
+(define Matrix
+  (λ (rows columns)
+    (Vec (Vec Nat columns) rows)))
+
+;; Exercise 14.2
+;;
+;; Define a function called matrix-ref that can be used to find the
+;; entries of a Matrix. Use Fin types for the arguments of this function
+;; that bounds check the call to the dimenstions of the matrix.
