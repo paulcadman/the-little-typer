@@ -27,11 +27,11 @@ Theorem list_length_append_dist :
 Proof.
   intros.
   induction l1.
-  simpl.
-  reflexivity.
-  simpl.
-  rewrite IHl1.
-  reflexivity.
+  - simpl.
+    reflexivity.
+  - simpl.
+    rewrite IHl1.
+    reflexivity.
 Qed.
 
 Definition leq a b := exists k, k + a = b.
@@ -42,20 +42,43 @@ Proof.
   ring.
 Qed.
 
+Search (_ -> False).
+
+Search (?x + ?y = ?y + ?x).
+Search (?x + 1 = S (?x)).
+Search (?x + (?y + _) = (?x + ?y) + _).
+Search (?x + (?y + _) = ?x + ?y + _).
+(* Nat.add_1_r: forall n : nat, n + 1 = S n *)
+
+Search (2 = _).
+Print Nat.two_succ.
+
+Lemma one_plus_one_two : 2 = 1 + 1.
+Proof.
+  simpl.
+  reflexivity.
+Defined.
+
+Print one_plus_one_two.
+Check eq_add_S.
+(*eq_add_S
+     : forall n m : nat, S n = S m -> n = m
+*)
+Locate "~".
+
+Search (2 = 1 + 1).
+Search (S O = 1 ).
+
 Lemma not_two_leq_one : ~leq 2 1.
 Proof.
   unfold leq.
   unfold not.
-  intros.
-  destruct H.
-  assert (one_plus_one_two : 2 = 1 + 1).
-  ring.
-  rewrite one_plus_one_two in H.
-  assert (x_succ : forall x, x + (1 + 1) = S (S x)).
-  intros.
-  ring.
-  rewrite x_succ in H.
-  assert (contra : S x = O).
-  apply (eq_add_S (S x) O H).
+  intro H.
+  destruct H as [k H1].
+  rewrite BinInt.ZL0 in H1.
+  rewrite Nat.add_assoc in H1.
+  rewrite (Nat.add_1_r (k + 1)) in H1.
+  apply  (eq_add_S (k+1) O) in H1.
+  rewrite Nat.add_1_r in H1.
   discriminate.
-Qed.
+Defined.
