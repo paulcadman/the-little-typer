@@ -82,3 +82,79 @@ Proof.
   rewrite Nat.add_1_r in H1.
   discriminate.
 Defined.
+
+Lemma leq_trans : forall (a b c: nat), leq a b -> leq b c -> leq a c.
+Proof.
+  intros ? ? ? Hab Hbc.
+  unfold leq in Hab.
+  unfold leq in Hbc.
+  destruct Hab as [kab Hab].
+  destruct Hbc as [kbc Hbc].
+  induction Hab.
+  rewrite Nat.add_assoc in Hbc.
+  exists (kbc + kab).
+  apply Hbc.
+Defined.
+
+Lemma length_filter_list : forall A (l : list A) (p : A -> bool), leq (length (filter p l)) (length l).
+Proof.
+  intros.
+  unfold leq.
+  induction l.
+  - unfold filter.
+    exists 0.
+    reflexivity.
+  - destruct IHl as [kl IHl].
+    simpl.
+    induction (p a).
+    + cbn.
+      rewrite <- IHl.
+      exists kl.
+      ring.
+    + rewrite <- IHl.
+      exists (S kl).
+      ring.
+Defined.
+
+Lemma inj_plus : forall k a: nat, k + a = a -> k = 0.
+Proof.
+  intros.
+  induction a.
+  - rewrite Nat.add_0_r in H.
+    apply H.
+(* Nat.add_succ_r: forall n m : nat, n + S m = S (n + m) *)
+  - Search (_ + S _ = S _).
+    rewrite Nat.add_succ_r in H.
+    Search (S ?x = S ?y -> ?x = ?y).
+    (* eq_add_S: forall n m : nat, S n = S m -> n = m *)
+    apply eq_add_S in H.
+    apply IHa.
+    exact H.
+Defined.
+
+Lemma sum_to_zero : forall n m: nat, n + m = 0 -> m = 0.
+Proof.
+  intros.
+  induction n.
+  - exact H.
+  - rewrite Nat.add_succ_l in H.
+    Search (S _ = 0).
+    (* Nat.neq_succ_0: forall n : nat, S n <> 0 *)
+    eapply Nat.neq_succ_0 in H.
+    induction H.
+Defined.
+
+
+Lemma leq_antisymmetry : forall a b: nat, leq a b -> leq b a -> a = b.
+Proof.
+  intros ? ? leqab leqba.
+  unfold leq in leqab.
+  destruct leqab as [kab leqab].
+  destruct leqba as [kba leqba].
+  induction leqab.
+  rewrite Nat.add_assoc in leqba.
+  eapply inj_plus in leqba.
+  eapply sum_to_zero in leqba.
+  rewrite leqba.
+  reflexivity.
+Defined.
