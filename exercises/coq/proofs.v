@@ -11,7 +11,8 @@ Theorem same_lists :
   forall A (l1: list A) (l2: list A) (e1:A) (e2:A), e1 = e2 -> l1 = l2 -> (e1::l1) = (e2::l2).
   intros.
   rewrite H.
-  apply (same_cons _ _ _ _ H0).
+  eapply same_cons.
+  exact H0.
 Qed.
 
 Theorem same_lists2 :
