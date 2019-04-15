@@ -145,7 +145,6 @@ Proof.
     induction H.
 Defined.
 
-
 Lemma leq_antisymmetry : forall a b: nat, leq a b -> leq b a -> a = b.
 Proof.
   intros ? ? leqab leqba.
@@ -158,4 +157,100 @@ Proof.
   eapply sum_to_zero in leqba.
   rewrite leqba.
   reflexivity.
+Defined.
+
+Check nat_rec.
+
+Definition double_num : nat -> nat :=
+  nat_rec (fun _ => nat)
+          0
+          (fun _ prev => 2 + prev).
+
+Print Nat.Even.
+
+Definition Even : nat -> Prop := fun n => exists k, n = 2 * k.
+Definition Odd : nat -> Prop := fun n => exists k, n = 2 * k + 1.
+
+Lemma zero_is_even : Even 0.
+Proof.
+  unfold Even.
+  exists 0.
+  reflexivity.
+Defined.
+
+Lemma one_is_odd : Odd 1.
+  unfold Odd.
+  exists 0.
+  reflexivity.
+Defined.
+
+Search (Nat.Even).
+
+Lemma sum_of_two_evens_is_even : forall n m : nat, Even n -> Even m -> Even (n + m).
+Proof.
+  intros ? ? en em.
+  unfold Even in en.
+  unfold Even in em.
+  induction en as [k_en en].
+  induction em as [k_em em].
+  unfold Even.
+  rewrite en.
+  rewrite em.
+  Search (?x * _ + ?x * _).
+  (* Nat.mul_add_distr_l: forall n m p : nat, n * (m + p) = n * m + n * p *)
+  exists (k_en + k_em).
+  rewrite Nat.mul_add_distr_l.
+  reflexivity.
+Defined.
+
+Lemma two_is_even : Even 2.
+Proof.
+  exists 1.
+  reflexivity.
+Defined.
+
+Lemma nOrSuccIsEven : forall n : nat, Even n \/ Even (S n).
+Proof.
+  intros.
+  induction n.
+  left; exact zero_is_even.
+  destruct IHn.
+  - right; exact (sum_of_two_evens_is_even 2 n two_is_even H).
+  - left; exact H.
+Defined.
+
+Lemma succ_of_even_is_odd : forall n : nat, Even n -> Odd (S n).
+Proof.
+  intros.
+  unfold Even in H.
+  destruct H as [k H].
+  unfold Odd.
+  exists k.
+  rewrite <- H.
+  Search (_ + 1).
+  (* Nat.add_1_r: forall n : nat, n + 1 = S n *)
+  rewrite <- Nat.add_1_r.
+  reflexivity.
+Defined.
+
+Lemma succ_of_odd_is_even : forall n : nat, Odd n -> Even (S n).
+Proof.
+  intros.
+  unfold Odd in H.
+  destruct H as [k H].
+  unfold Even.
+  exists (k + 1).
+  rewrite H.
+  ring.
+Defined.
+
+Lemma even_or_odd : forall n : nat, Even n \/ Odd n.
+  intros.
+  induction n.
+  - left; exact zero_is_even.
+  - destruct IHn.
+    + right; apply succ_of_even_is_odd.
+      exact H.
+    + left; apply succ_of_odd_is_even.
+      exact H.
 Defined.
