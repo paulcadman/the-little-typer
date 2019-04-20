@@ -7,7 +7,7 @@ https://groups.google.com/forum/#!forum/the-little-typer-study-group-london
 In April 2019 the exercises in the repository were reorganised and so the filenames in the forum do not match the paths in the repository. This table gives a map between the filename in the forum and the current path in the repository.
 
 | Filename in the forum        | Path in the repository                                                           |
-| :-:                          | :-:                                                                              |
+| :--                          | :--                                                                              |
 | recursion.rkt                | [exercises/recursion.rkt](exercises/recursion.rkt)                               |
 | recursion-crib.rkt           | [exercises/recursion-crib.rkt](exercises/recursion-crib.rkt)                     |
 | nat-elimination.rkt          | [exercises/nat-elimination.rkt](exercises/nat-elimination.rkt)                   |
