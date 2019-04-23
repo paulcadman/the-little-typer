@@ -107,17 +107,28 @@ negation to prove a proposition.
 
 Hint:
 
-Have a look at the definition of [pem] in coq/ch15.v (relative to the root
-of this repository). Though for these Theorems you'll probably want to use
-tactics rather than an explicit lambda.
-*)
+To prove that double negation imples excluded middle you'll need to use the evidence
+for the double negation of the exluded middle, [double_neg_pem].
+ *)
 
-Theorem pem_double_neg : forall X, (X \/ ~ X) -> (~~ X) -> X.
+
+Definition double_neg_pem : forall X, ~~ (X \/ ~ X) :=
+  fun X pem_false => (pem_false (or_intror (fun x => (pem_false (or_introl x))))).
+
+(** NB: This theorem can be proved with only a single quantifier. The converse is not
+true with a single quantifier. It's still possible to prove that excluded middle and double
+negation are equivalent but quantifiers on both sides of the implication are required ([double_neg_imples_pem]) *)
+Theorem pem_X_imples_double_neg_X : forall X, (X \/ ~ X) -> ((~~ X) -> X).
 Proof.
   exact fill_me.
 Qed.
 
-Theorem double_neg_pem : forall X, (~~ X) -> X -> (X \/ ~ X).
+Theorem pem_imples_double_neg : (forall X, (X \/ ~ X)) -> (forall Y, ((~~ Y) -> Y)).
+Proof.
+  exact fill_me.
+Qed.
+
+Theorem double_neg_implies_pem : (forall X, ((~~ X) -> X)) -> (forall Y, (Y \/ ~ Y)).
 Proof.
   exact fill_me.
 Qed.

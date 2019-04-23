@@ -169,9 +169,13 @@ Hint:
 Have a look at the definition of [pem] in coq/ch15.v (relative to the root
 of this repository). Though for these Theorems you'll probably want to use
 tactics rather than an explicit lambda.
-*)
+ *)
 
-Theorem pem_double_neg : forall X, (X \/ ~ X) -> (~~ X) -> X.
+
+Definition double_neg_pem : forall X, ~~ (X \/ ~ X) :=
+  fun X pem_false => (pem_false (or_intror (fun x => (pem_false (or_introl x))))).
+
+Theorem pem_X_imples_double_neg_X : forall X, (X \/ ~ X) -> ((~~ X) -> X).
 Proof.
   intros.
   unfold not in H.
@@ -182,8 +186,17 @@ Proof.
     induction not_x.
 Qed.
 
-Theorem double_neg_pem : forall X, (~~ X) -> X -> (X \/ ~ X).
+Theorem pem_imples_double_neg : (forall X, (X \/ ~ X)) -> (forall Y, ((~~ Y) -> Y)).
 Proof.
   intros.
-  left; exact H0.
+  apply (pem_X_imples_double_neg_X Y) in H.
+  exact H.
+  exact H0.
+Qed.
+
+Theorem double_neg_implies_pem : (forall X, ((~~ X) -> X)) -> (forall Y, (Y \/ ~ Y)).
+Proof.
+  intros.
+  apply H.
+  apply (double_neg_pem Y).
 Qed.
