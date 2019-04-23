@@ -2,12 +2,6 @@ Require Import Vector Arith Bool List Nat.
 
 (** Exercises for Chapter 15 of The Little Typer *)
 
-(** Remove the following axiom when you've finished all the exercises. This
-axoim provides a value of any type to allow the file to compile and incomplete
-expressions to be used.
- *)
-Axiom fill_me : forall {X : Type}, X.
-
 Definition leq : nat -> nat -> Prop :=
   fun m n => exists k, k + m = n.
 
@@ -22,7 +16,20 @@ State and prove that 3 is not less than 1.
 
 Lemma three_not_leq_one : ~ (leq 3 1).
 Proof.
-  exact fill_me.
+  unfold not.
+  intros.
+  destruct H.
+  Search (S _ = S _ -> _ = _).
+  Search (_ + 1 = S _).
+  Search (?x + ?y = ?y + ?x).
+  Search (S _ <> 0).
+  (* Nat.neq_succ_0: forall n : nat, S n <> 0 *)
+  (* Nat.add_comm: forall n m : nat, n + m = m + n *)
+  (* Nat.add_1_r: forall n : nat, n + 1 = S n *)
+  rewrite Nat.add_comm in H.
+  apply eq_add_S in H.
+  apply Nat.neq_succ_0 in H.
+  exact H.
 Qed.
 
 (** Exercise 15.2
@@ -54,7 +61,13 @@ You can find these facts using:
 
 Lemma n_not_S_n : forall n, n <> S n.
 Proof.
-  exact fill_me.
+  unfold not.
+  intros.
+  induction n.
+  - apply Nat.neq_0_succ in H.
+    exact H.
+  - apply eq_add_S in H.
+    exact (IHn H).
 Qed.
 
 (** Exercise 15.3
@@ -66,7 +79,19 @@ than or equal to n.
 
 Lemma Sn_not_leq_n : forall n, ~ (leq (S n) n).
 Proof.
-  exact fill_me.
+  unfold not.
+  intros.
+  induction n.
+  - destruct H.
+    Search (_ + 1 = S _).
+    (* Nat.add_1_r: forall n : nat, n + 1 = S n *)
+    rewrite Nat.add_1_r in H.
+    apply Nat.neq_succ_0 in H.
+    exact H.
+  - destruct H.
+    rewrite Nat.add_succ_r in H.
+    apply eq_add_S in H.
+    exact (IHn (ex_intro _ x H)).
 Qed.
 
 (** Exercise 15.4
@@ -75,9 +100,32 @@ State and prove that 1 is not Even.
 
  *)
 
-Lemma three_is_not_even : ~ (Even 1).
+Lemma one_is_not_even : ~ (Even 1).
 Proof.
-  exact fill_me.
+  unfold not.
+  intros.
+  destruct H.
+  induction x.
+  - apply Nat.neq_succ_0 in H.
+    exact H.
+  - Search (?x * (_ + _) = ?x * _ + ?x * _).
+    (* Nat.mul_add_distr_l: *)
+    (*   forall n m p : nat, n * (m + p) = n * m + n * p *)
+    Search (1 + ?x = S ?x).
+    Check Nat.add_1_r.
+    Check Nat.add_1_l.
+    (* Nat.add_1_l *)
+    (*      : forall n : nat, 1 + n = S n *)
+    rewrite <- (Nat.add_1_r x)  in H.
+    rewrite (Nat.mul_add_distr_l 2 x 1) in H.
+    Search (?x + ?y = ?y + ?x).
+    rewrite Nat.add_comm in H.
+    Search (_ * 1 = _).
+    rewrite Nat.mul_1_r in H.
+    apply eq_add_S in H.
+    Search (0 <> S _).
+    apply Nat.neq_0_succ in H.
+    exact H.
 Qed.
 
 (** Exercise 15.C1
@@ -96,8 +144,19 @@ an auxilliary function that plays the same role as the nested [ind-Vec] in
 frame 15.74 of the book.
  *)
 
+Definition rest' : forall E l, (Vector.t E (S l) -> forall k, (S l) = S k -> Vector.t E k).
+  intros.
+  induction X.
+  - apply Nat.neq_0_succ in H.
+    induction H.
+  - apply eq_add_S in H.
+    rewrite H in X.
+    exact X.
+Defined.
+
 Definition rest : forall E l, Vector.t E (S l) -> Vector.t E l.
-  exact fill_me.
+  intros.
+  exact ((rest' E l X) l (eq_refl (S l))).
 Qed.
 
 (** Exercise 15.C2
@@ -114,10 +173,17 @@ tactics rather than an explicit lambda.
 
 Theorem pem_double_neg : forall X, (X \/ ~ X) -> (~~ X) -> X.
 Proof.
-  exact fill_me.
+  intros.
+  unfold not in H.
+  unfold not in H0.
+  destruct H as [x | not_x].
+  - exact x.
+  - apply H0 in not_x.
+    induction not_x.
 Qed.
 
 Theorem double_neg_pem : forall X, (~~ X) -> X -> (X \/ ~ X).
 Proof.
-  exact fill_me.
+  intros.
+  left; exact H0.
 Qed.
